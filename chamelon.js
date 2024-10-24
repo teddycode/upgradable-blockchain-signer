@@ -1,24 +1,17 @@
 const bigintCryptoUtils = require("bigint-crypto-utils");
 const bigintConversion = require("bigint-conversion");
 const crypto = require("crypto");
+const { log } = require("console");
 
 class ChameleonHash {
-  constructor() {
-    // 使用已知的安全素数 p 和生成元 g
-    this.p = bigintConversion.hexToBigint(
-      "FFFFFFFFFFFFFFFFC90FDAA22168C234C4C6628B80DC1CD1" +
-        "29024E088A67CC74020BBEA63B139B22514A08798E3404DD" +
-        "EF9519B3CD3A431B302B0A6DF25F14374FE1356D6D51C245" +
-        "E485B576625E7EC6F44C42E9A637ED6B0BFF5CB6F406B7ED" +
-        "EE386BFB5A899FA5AE9F24117C4B1FE649286651ECE45B3D" +
-        "C2007CB8A163BF0598DA48361C55D39A69163FA8FD24CF5F" +
-        "83655D23DCA3AD961C62F356208552BB9ED529077096966D" +
-        "670C354E4ABC9804F1746C08CA18217C32905E462E36CE3B" +
-        "E39E772C180E86039B2783A2EC07A28FB5C55DF06F4C52C9" +
-        "DE2BCBF6955817183995497CEA956AE515D2261898FA0510" +
-        "15728E5A8AACAA68FFFFFFFFFFFFFFFF"
-    );
+  constructor(bitLength = 2048) {
+    this.bitLength = bitLength;
+  }
 
+  async initialize() {
+    // 使用已知的安全素数 p 和生成元 g
+    console.log("正在生成安全素数，请稍候...");
+    await this.generateSafePrimes(this.bitLength);
     // 确保 p 为素数
     if (!bigintCryptoUtils.isProbablyPrime(this.p)) {
       throw new Error("p is not a prime number.");
@@ -41,6 +34,19 @@ class ChameleonHash {
 
     // 计算公钥 y = g^x mod p
     this.y = bigintCryptoUtils.modPow(this.g, this.x, this.p);
+  }
+
+  // 生成安全素数
+  async generateSafePrimes(bitLength) {
+    while (true) {
+      this.q = await bigintCryptoUtils.prime(bitLength - 1);
+      this.p = 2n * this.q + 1n;
+
+      if (await bigintCryptoUtils.isProbablyPrime(this.p)) {
+        break;
+      }
+    }
+    console.log(`生成的安全素数 p 位数: ${this.p.toString(2).length}`);
   }
 
   // 生成随机数
@@ -69,7 +75,8 @@ class ChameleonHash {
 
 // 测试用例
 (async () => {
-  const ch = new ChameleonHash();
+  const ch = new ChameleonHash(512);
+  await ch.initialize();
 
   // 原始消息 m1 ∈ Z_p^*
   const m1Buffer = crypto.randomBytes(64);
