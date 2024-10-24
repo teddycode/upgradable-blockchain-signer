@@ -1,0 +1,29 @@
+{
+  "name": "upgradable-blockchain-signer",
+  "version": "1.0.0",
+  "description": "An upgradable signer solution for blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teddycode/upgradable-blockchain-signer.git"
+  },
+  "keywords": [
+    "blockchain",
+    "signer",
+    "chemelonhash",
+    "address"
+  ],
+  "author": "teddycode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/teddycode/upgradable-blockchain-signer/issues"
+  },
+  "homepage": "https://github.com/teddycode/upgradable-blockchain-signer#readme",
+  "dependencies": {
+    "bigint-conversion": "^2.4.3",
+    "bigint-crypto-utils": "^3.3.0"
+  }
+}
