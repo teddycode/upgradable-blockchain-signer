@@ -24,6 +24,7 @@
   "homepage": "https://github.com/teddycode/upgradable-blockchain-signer#readme",
   "dependencies": {
     "bigint-conversion": "^2.4.3",
-    "bigint-crypto-utils": "^3.3.0"
+    "bigint-crypto-utils": "^3.3.0",
+    "elliptic": "^6.5.7"
   }
 }

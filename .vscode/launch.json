@@ -7,11 +7,20 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "ChamelonHash",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}\\chamelon.js"
+      "program": "${workspaceFolder}\\tests\\chamelon.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Manager",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}\\tests\\manager.js"
     }
   ]
 }

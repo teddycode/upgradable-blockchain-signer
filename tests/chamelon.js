@@ -1,4 +1,7 @@
-const ChameleonHash = require("../chamelon");
+const ChameleonHash = require("../crypto/chamelon");
+const bigintCryptoUtils = require("bigint-crypto-utils");
+const bigintConversion = require("bigint-conversion");
+const crypto = require("crypto");
 
 // 测试用例
 const BenchmarkChamelonHash = async () => {
